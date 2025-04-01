@@ -12,6 +12,9 @@ inputs:
     description: 'The folder path within the bucket'
     required: true
     default: 'dist'
+outputs:
+  website-url:
+    description: 'The URL of the deployed website'
 runs:
   using: 'node16'
   main: 's3upload.js'
