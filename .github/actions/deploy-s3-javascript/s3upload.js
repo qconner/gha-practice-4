@@ -24,7 +24,7 @@ function run() {
     // github.getOctokit().
     // useful for github API use
 
-    exec.exec(`echo aws s3 sync ${folder} ${s3URI} --region ${region}`);
+    exec.exec(`aws s3 sync ${folder} ${s3URI} --region ${region}`);
 
     const websiteURL = `http://${bucket}.s3-website-${region}.amazonaws.com`;
     core.setOutput('website-url', websiteURL);
