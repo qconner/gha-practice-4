@@ -15,7 +15,7 @@ jobs:
         with:
           ignore-cache: 'true'
       - name: Cache Usage Status
-        run: echo "cache usage: ${{ steps.fetch.outputs.status-cache-use }}"
+        run: echo "cache usage was ${{ steps.fetch.outputs.status-cache-use }}"
       - name: Lint code
         run: npm run lint
   test:
