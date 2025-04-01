@@ -8,7 +8,8 @@ inputs:
 outputs:
   status-cache-use:
     description: 'was cache used'
-    value: ${{ steps.deps.outputs.cacheused }}
+    #value: ${{ steps.deps.outputs.cacheused }}
+    value: 'unknown'
 runs:
   using: 'composite'
   steps:
