@@ -1,15 +1,21 @@
 name: 'Install and cache node dependencies'
 description: 'Use npm to get dependencies then cache the node_modules directory'
+inputs:
+  ignore-cache:
+    description: 'Set true to ignore cache and force dependency install'
+    required: false
+    default: 'false'
 runs:
   using: 'composite'
   steps:
     - name: Cache dependencies
+      if: inputs.ignore-cache != 'true'
       id: cache
       uses: actions/cache@v4
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.ignore-cache == 'true'
       run: npm ci
       shell: bash
