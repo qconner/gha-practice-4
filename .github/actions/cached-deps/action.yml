@@ -8,8 +8,7 @@ inputs:
 outputs:
   status-cache-use:
     description: 'was cache used'
-    # if cache-used was not set to false then cache was used
-    value: ${{ steps.deps.outputs.cache-used == 'false' && 'false' || 'true' }}
+    value: ${{ (steps.cache.outputs.cache-hit == 'true' && inputs.ignore-cache == 'false') && 'true' || 'false' }}
 runs:
   using: 'composite'
   steps:
@@ -23,7 +22,5 @@ runs:
     - name: Install dependencies
       id: deps
       if: steps.cache.outputs.cache-hit != 'true' || inputs.ignore-cache == 'true'
-      run: |
-        npm ci
-        echo "cache-used='false'" >> $GITHUB_OUTPUT
+      run: npm ci
       shell: bash
