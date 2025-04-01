@@ -1,0 +1,5 @@
+name: 'Deploy to S3'
+description: 'Use minio S3 to deploy some artifact'
+runs:
+  using: 'node16'
+  main: 's3upload.js'
