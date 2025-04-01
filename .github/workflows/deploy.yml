@@ -10,9 +10,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Fetch and Cache dependencies
+        id: fetch
         uses: ./.github/actions/cached-deps
         with:
           ignore-cache: 'true'
+      - name: Cache Usage Status
+        run: echo "cache usage: ${{ steps.fetch.outputs.status-cache-use }}"
       - name: Lint code
         run: npm run lint
   test:

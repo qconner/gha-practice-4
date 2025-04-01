@@ -5,6 +5,10 @@ inputs:
     description: 'Set true to ignore cache and force dependency install'
     required: false
     default: 'false'
+outputs:
+  status-cache-use:
+    description: 'was cache used'
+    value: ${{ steps.deps.cache-used }}
 runs:
   using: 'composite'
   steps:
@@ -16,6 +20,10 @@ runs:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
+      id: deps
+      echo "cache-used=true" >> $GITHUB_OUTPUT
       if: steps.cache.outputs.cache-hit != 'true' || inputs.ignore-cache == 'true'
-      run: npm ci
+      run: |
+        npm ci
+        echo "cache-used=false" >> $GITHUB_OUTPUT
       shell: bash
