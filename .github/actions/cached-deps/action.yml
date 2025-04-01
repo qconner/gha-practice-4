@@ -21,9 +21,9 @@ runs:
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
       id: deps
-      echo "cache-used=true" >> $GITHUB_OUTPUT
+      echo "cache-used='true'" >> $GITHUB_OUTPUT
       if: steps.cache.outputs.cache-hit != 'true' || inputs.ignore-cache == 'true'
       run: |
         npm ci
-        echo "cache-used=false" >> $GITHUB_OUTPUT
+        echo "cache-used='false'" >> $GITHUB_OUTPUT
       shell: bash
