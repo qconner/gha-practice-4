@@ -1,5 +1,17 @@
 name: 'Deploy to S3'
 description: 'Use minio S3 to deploy some artifact'
+inputs:
+  bucket:
+    description: 'The S3 bucket name'
+    required: true
+  region:
+    description: 'The S3 bucket name'
+    required: false
+    default: 'us-east-1'
+  folder:
+    description: 'The folder path within the bucket'
+    required: true
+    default: 'dist'
 runs:
   using: 'node16'
   main: 's3upload.js'

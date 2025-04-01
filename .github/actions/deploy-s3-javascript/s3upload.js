@@ -9,7 +9,22 @@ const exec = require('@actions/exec');
 
 function run() {
     core.notice('Entered custom Javascript action');
+    const bucket = core.getInput('bucket', { required: true })
+    const region = core.getInput('region', { required: true })
+    const folder = core.getInput('folder', { required: true })
 
+    core.notice('bucket ' + bucket)
+    core.notice('region ' + region)
+    core.notice('folder ' + folder)
+
+    const s3URI = `s3://${bucket}`
+
+    // github.context
+
+    // github.getOctokit().
+    // useful for github API use
+
+    exec.exec('aws s3 sync ${folder} ${s3URI} --region ${region}'
 }
 
 run();
